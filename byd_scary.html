@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYD가 무서운 이유</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    padding: 4rem 1rem 2rem;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  .back { display: inline-block; font-size: 13px; color: #999; margin-bottom: 2rem; text-decoration: none; }
+  .back:hover { color: #1a1a1a; }
+  .header { text-align: center; margin-bottom: 2rem; }
+  .badge {
+    display: inline-block;
+    background: #e1f5ee;
+    color: #0f6e56;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .title { font-size: 32px; font-weight: 600; color: #1a1a1a; line-height: 1.3; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #888; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #999;
+    margin: 2rem 0 1rem;
+    letter-spacing: 0.05em;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 14px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 14px;
+  }
+  .card-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .card-left { flex: 1; }
+  .card-right { text-align: right; flex-shrink: 0; }
+  .label { font-size: 11px; color: #999; margin-bottom: 4px; }
+  .claim { font-size: 17px; font-weight: 500; color: #1a1a1a; }
+  .detail { font-size: 12px; color: #aaa; margin-top: 4px; }
+  .value-green { font-size: 15px; font-weight: 500; color: #0f6e56; }
+  .value-red { font-size: 15px; font-weight: 500; color: #a32d2d; }
+  .bar-wrap { height: 4px; background: #f0efea; border-radius: 2px; margin-top: 12px; }
+  .bar-green { height: 100%; background: #5DCAA5; border-radius: 2px; }
+  .bar-red { height: 100%; background: #f09595; border-radius: 2px; }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 14px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .stat-num { font-size: 28px; font-weight: 600; color: #0f6e56; margin-bottom: 4px; }
+  .stat-label { font-size: 12px; color: #999; }
+  .stat-detail { font-size: 11px; color: #bbb; margin-top: 4px; }
+  .summary {
+    background: #f5f4f0;
+    border-radius: 10px;
+    padding: 1.25rem 1.75rem;
+    border-left: 3px solid #5DCAA5;
+    margin-top: 8px;
+  }
+  .summary-inner { display: flex; gap: 16px; align-items: center; }
+  .summary-text { flex: 1; }
+  .summary-label { font-size: 12px; color: #999; margin-bottom: 4px; }
+  .summary-formula { font-size: 14px; color: #1a1a1a; line-height: 1.6; }
+  .summary-formula span { color: #0f6e56; font-weight: 500; }
+  .summary-stat { text-align: center; }
+  .stat-big { font-size: 32px; font-weight: 600; color: #0f6e56; }
+  .stat-desc { font-size: 11px; color: #999; }
+  .footer { text-align: center; margin-top: 2rem; font-size: 12px; color: #bbb; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">← 홈으로</a>
+
+  <div class="header">
+    <div class="badge">산업 분석</div>
+    <div class="title">BYD가 무서운 이유</div>
+    <div class="subtitle">배터리 회사가 자동차를 만들면 어떻게 되는가</div>
+  </div>
+
+  <div class="section-title">숫자로 보는 BYD</div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">176만</div>
+      <div class="stat-label">2024년 4분기 판매량</div>
+      <div class="stat-detail">테슬라의 약 2배</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">30%</div>
+      <div class="stat-label">중국 EV 시장 점유율</div>
+      <div class="stat-detail">압도적 1위</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">90+</div>
+      <div class="stat-label">진출 국가 수</div>
+      <div class="stat-detail">글로벌 확장 중</div>
+    </div>
+  </div>
+
+  <div class="section-title">왜 따라잡기 어려운가</div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="label">수직계열화</div>
+        <div class="claim">배터리부터 완성차까지 전부 자체 생산</div>
+        <div class="detail">소재 → 셀 → 팩 → 차량 → 반도체까지</div>
+      </div>
+      <div class="card-right">
+        <div class="label">경쟁사 대비</div>
+        <div class="value-green">원가 30%↓</div>
+        <div class="detail">구조적 우위</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-green" style="width:90%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="label">블레이드 배터리</div>
+        <div class="claim">못 관통해도 불꽃 없음 — 현존 최고 안전성</div>
+        <div class="detail">LFP 기반, 열폭주 시 산소 방출 없음</div>
+      </div>
+      <div class="card-right">
+        <div class="label">NCM 대비</div>
+        <div class="value-green">압도적 우위</div>
+        <div class="detail">화재 리스크 극소</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-green" style="width:95%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="label">가격 경쟁력</div>
+        <div class="claim">Seagull 기본형 — 약 1만 달러 (한화 1,450만 원)</div>
+        <div class="detail">테슬라 Model 3의 1/4 수준</div>
+      </div>
+      <div class="card-right">
+        <div class="label">포지션</div>
+        <div class="value-green">대중 시장 지배</div>
+        <div class="detail">가성비 끝판왕</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-green" style="width:85%"></div></div>
+  </div>
+
+  <div class="section-title">BYD의 약점</div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="label">지정학 리스크</div>
+        <div class="claim">미국 시장 진출 사실상 불가</div>
+        <div class="detail">관세 100%+, FEOC 규제, 정치적 압박</div>
+      </div>
+      <div class="card-right">
+        <div class="label">미국 내</div>
+        <div class="value-red">구조적 차단</div>
+        <div class="detail">단기 해소 어려움</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-red" style="width:85%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="label">브랜드 감성</div>
+        <div class="claim">프리미엄·어드벤처 감성은 아직 약함</div>
+        <div class="detail">리비안, 포르쉐 같은 감성 구축이 과제</div>
+      </div>
+      <div class="card-right">
+        <div class="label">포지션</div>
+        <div class="value-red">가성비 이미지</div>
+        <div class="detail">프리미엄 진입 중</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-red" style="width:40%"></div></div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-inner">
+      <div class="summary-text">
+        <div class="summary-label">결론</div>
+        <div class="summary-formula"><span>하드웨어로 세상을 먹는 중.</span> 미국 시장만 막혀있을 뿐, 글로벌에선 이미 테슬라를 앞섰다. 리비안의 진짜 장기 경쟁자는 테슬라가 아니라 BYD다.</div>
+      </div>
+      <div class="summary-stat">
+        <div class="stat-big">글로벌</div>
+        <div class="stat-desc">1위 EV 업체</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">made with Claude · 2026</div>
+
+</div>
+</body>
+</html>

@@ -40,14 +40,14 @@
   .post-card:hover { border-color: #bbb; }
   .post-badge {
     display: inline-block;
-    background: #fde8e8;
-    color: #a32d2d;
     font-size: 11px;
     font-weight: 500;
     padding: 3px 10px;
     border-radius: 20px;
     margin-bottom: 10px;
   }
+  .badge-red { background: #fde8e8; color: #a32d2d; }
+  .badge-green { background: #e1f5ee; color: #0f6e56; }
   .post-title { font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; line-height: 1.4; }
   .post-desc { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 14px; }
   .post-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -69,7 +69,7 @@
   <div class="grid">
 
     <a href="musk_bluff.html" class="post-card">
-      <div class="post-badge">팩트 체크</div>
+      <div class="post-badge badge-red">팩트 체크</div>
       <div class="post-title">일론 머스크의 뻥카 연대기</div>
       <div class="post-desc">사이버트럭, FSD, 화성... 말한 것과 실제 일어난 것의 차이를 데이터로 정리했다.</div>
       <div class="post-footer">
@@ -79,9 +79,19 @@
     </a>
 
     <a href="musk_terafab.html" class="post-card">
-      <div class="post-badge">팩트 체크</div>
+      <div class="post-badge badge-red">팩트 체크</div>
       <div class="post-title">머스크의 반도체 삽질 — Terafab</div>
       <div class="post-desc">연 2천억 개 칩 생산? 36조 원 투입? 반도체의 현실과 얼마나 다른지 짚어봤다.</div>
+      <div class="post-footer">
+        <span class="post-date">2026년 3월</span>
+        <span class="post-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="byd_scary.html" class="post-card">
+      <div class="post-badge badge-green">산업 분석</div>
+      <div class="post-title">BYD가 무서운 이유</div>
+      <div class="post-desc">배터리 회사가 자동차를 만들면 어떻게 되는가. 글로벌 EV 1위의 진짜 경쟁력을 분석했다.</div>
       <div class="post-footer">
         <span class="post-date">2026년 3월</span>
         <span class="post-arrow">→</span>
