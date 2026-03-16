@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>머스크의 반도체 삽질 — Terafab 팩트체크</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    padding: 4rem 1rem 2rem;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  .back {
+    display: inline-block;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 2rem;
+    text-decoration: none;
+  }
+  .back:hover { color: #1a1a1a; }
+  .header { text-align: center; margin-bottom: 2rem; }
+  .badge {
+    display: inline-block;
+    background: #fde8e8;
+    color: #a32d2d;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .title { font-size: 32px; font-weight: 600; color: #1a1a1a; line-height: 1.3; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #888; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #999;
+    margin: 2rem 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 14px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 14px;
+  }
+  .card-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .card-left { flex: 1; }
+  .card-right { text-align: right; flex-shrink: 0; }
+  .year { font-size: 11px; color: #999; margin-bottom: 4px; }
+  .claim { font-size: 17px; font-weight: 500; color: #1a1a1a; }
+  .detail { font-size: 12px; color: #aaa; margin-top: 4px; }
+  .result-label { font-size: 11px; color: #999; margin-bottom: 4px; }
+  .result-fail { font-size: 15px; font-weight: 500; color: #a32d2d; }
+  .result-warn { font-size: 15px; font-weight: 500; color: #854f0b; }
+  .result-ok { font-size: 15px; font-weight: 500; color: #3b6d11; }
+  .bar-wrap { height: 4px; background: #f0efea; border-radius: 2px; margin-top: 12px; }
+  .bar-fail { height: 100%; background: #f09595; border-radius: 2px; }
+  .bar-warn { height: 100%; background: #FAC775; border-radius: 2px; }
+  .bar-ok { height: 100%; background: #97C459; border-radius: 2px; }
+  .highlight {
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 14px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 14px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .highlight-num { font-size: 40px; font-weight: 600; color: #a32d2d; flex-shrink: 0; }
+  .highlight-label { font-size: 11px; color: #999; margin-bottom: 4px; }
+  .highlight-text { font-size: 15px; color: #1a1a1a; line-height: 1.6; }
+  .summary {
+    background: #f5f4f0;
+    border-radius: 10px;
+    padding: 1.25rem 1.75rem;
+    border-left: 3px solid #f09595;
+    margin-top: 8px;
+  }
+  .summary-inner { display: flex; gap: 16px; align-items: center; }
+  .summary-text { flex: 1; }
+  .summary-label { font-size: 12px; color: #999; margin-bottom: 4px; }
+  .summary-formula { font-size: 14px; color: #1a1a1a; line-height: 1.6; }
+  .summary-formula span { color: #a32d2d; font-weight: 500; }
+  .summary-stat { text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 600; color: #a32d2d; }
+  .stat-desc { font-size: 11px; color: #999; }
+  .footer { text-align: center; margin-top: 2rem; font-size: 12px; color: #bbb; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">← 홈으로</a>
+
+  <div class="header">
+    <div class="badge">팩트 체크</div>
+    <div class="title">머스크의 반도체 삽질 — Terafab</div>
+    <div class="subtitle">2026년 3월, 그가 또 큰소리를 쳤다</div>
+  </div>
+
+  <div class="section-title">머스크가 한 말</div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="year">2026년 3월 발표</div>
+        <div class="claim">연간 1천억~2천억 개 AI 칩 생산</div>
+        <div class="detail">TSMC 전체 생산량의 70% 수준</div>
+      </div>
+      <div class="card-right">
+        <div class="result-label">현실</div>
+        <div class="result-warn">착공 선언 단계</div>
+        <div class="detail">아직 웨이퍼 없음</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-warn" style="width:8%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="year">투자 규모</div>
+        <div class="claim">250억 달러 (약 36조 원) 투입</div>
+        <div class="detail">삼성 파운드리 공장 1개 = 약 20조 원</div>
+      </div>
+      <div class="card-right">
+        <div class="result-label">현실</div>
+        <div class="result-warn">일부 착공 중</div>
+        <div class="detail">텍사스 패키징 공장만</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-warn" style="width:15%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="year">파트너십</div>
+        <div class="claim">인텔과 협력해서 생산</div>
+        <div class="detail">"인텔을 끌고 오겠다"</div>
+      </div>
+      <div class="card-right">
+        <div class="result-label">현실</div>
+        <div class="result-fail">탐색 단계</div>
+        <div class="detail">계약 없음</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-fail" style="width:5%"></div></div>
+  </div>
+
+  <div class="section-title">왜 어려운가</div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="year">반도체의 현실</div>
+        <div class="claim">착공 → 첫 웨이퍼까지 최소 2~3년</div>
+        <div class="detail">완전 양산까지는 5년 이상 필요</div>
+      </div>
+      <div class="card-right">
+        <div class="result-label">선례</div>
+        <div class="result-fail">인텔도 실패</div>
+        <div class="detail">파운드리 사업 고전 중</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-fail" style="width:20%"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-left">
+        <div class="year">젠슨 황의 경고</div>
+        <div class="claim">"TSMC 대체는 극도로 복잡한 도전"</div>
+        <div class="detail">엔비디아 CEO 직접 발언</div>
+      </div>
+      <div class="card-right">
+        <div class="result-label">현재 TSMC</div>
+        <div class="result-ok">독보적 1위</div>
+        <div class="detail">수십 년 축적</div>
+      </div>
+    </div>
+    <div class="bar-wrap"><div class="bar-ok" style="width:95%"></div></div>
+  </div>
+
+  <div class="section-title">리비안에게는?</div>
+
+  <div class="highlight">
+    <div class="highlight-num">+</div>
+    <div>
+      <div class="highlight-label">반사이익</div>
+      <div class="highlight-text">머스크가 테슬라 본업에 집중 못 할수록 리비안이 반사이익을 챙길 시간이 생긴다. R2 출시 타이밍과 절묘하게 맞아 떨어지는 상황.</div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-inner">
+      <div class="summary-text">
+        <div class="summary-label">결론</div>
+        <div class="summary-formula">돈은 쓰고 있지만 <span>목표는 현실과 한참 멀다.</span> 토요일 런칭은 완성이 아니라 시작 선언이다.</div>
+      </div>
+      <div class="summary-stat">
+        <div class="stat-num">5년+</div>
+        <div class="stat-desc">현실적 완성 시점</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">made with Claude · 2026</div>
+
+</div>
+</body>
+</html>
