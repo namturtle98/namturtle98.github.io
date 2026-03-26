@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>테슬라 건식공정 팩트체크</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e8e8e8;
+    --muted: #666;
+    --red: #ff3b3b;
+    --yellow: #f5c842;
+    --green: #3bff8a;
+    --blue: #3b8fff;
+    --accent: #ff3b3b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--yellow), var(--red));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+  .header-left {}
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: #fff;
+  }
+  .header h1 span { color: var(--red); }
+  .header-right {
+    text-align: right;
+  }
+  .header-right .date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .verdict-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 6px 16px;
+    letter-spacing: 2px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── CLAIM BOX ── */
+  .claim-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--yellow);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .claim-box .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--yellow);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .claim-box p {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #fff;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin-bottom: 40px;
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 80px 1px 1fr;
+    gap: 0 20px;
+    margin-bottom: 0;
+    opacity: 0;
+    animation: fadeUp 0.5s forwards;
+  }
+  .tl-item:nth-child(1) { animation-delay: 0.1s; }
+  .tl-item:nth-child(2) { animation-delay: 0.2s; }
+  .tl-item:nth-child(3) { animation-delay: 0.3s; }
+  .tl-item:nth-child(4) { animation-delay: 0.4s; }
+  .tl-item:nth-child(5) { animation-delay: 0.5s; }
+  .tl-item:nth-child(6) { animation-delay: 0.6s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tl-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-align: right;
+    padding-top: 18px;
+  }
+  .tl-line {
+    background: var(--border);
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tl-item.highlight .tl-dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+  .tl-item.ok .tl-dot { background: var(--green); }
+  .tl-item.warn .tl-dot { background: var(--yellow); }
+
+  .tl-content {
+    padding: 14px 0 24px 0;
+  }
+  .tl-content .title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+  .tl-item.highlight .tl-content .title { color: var(--red); }
+  .tl-item.ok .tl-content .title { color: var(--green); }
+  .tl-content .desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── KEY QUESTION ── */
+  .question-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .question-block .q {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    margin-bottom: 8px;
+  }
+  .question-block .sub {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .compare-header {
+    padding: 14px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+  .compare-header.pub { background: rgba(245,200,66,0.1); color: var(--yellow); }
+  .compare-header.real { background: rgba(255,59,59,0.1); color: var(--red); }
+
+  .compare-row {
+    display: contents;
+  }
+  .compare-cell {
+    padding: 14px 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+  }
+  .compare-cell.pub { background: rgba(245,200,66,0.04); }
+  .compare-cell.real { background: rgba(255,59,59,0.04); color: #ccc; }
+  .compare-cell .icon { margin-right: 8px; }
+
+  /* ── SMOKING GUN ── */
+  .smoking-gun {
+    background: var(--surface);
+    border: 1px solid var(--red);
+    padding: 32px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .smoking-gun::before {
+    content: 'SMOKING GUN';
+    position: absolute;
+    top: -1px; right: -1px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+  }
+  .smoking-gun .contract {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin: 20px 0;
+  }
+  .contract-num {
+    text-align: center;
+  }
+  .contract-num .amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    line-height: 1;
+  }
+  .contract-num .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .contract-arrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--red);
+    flex: 1;
+    text-align: center;
+  }
+  .contract-num.before .amount { color: var(--yellow); }
+  .contract-num.after .amount { color: var(--red); }
+
+  .logic-chain {
+    background: rgba(255,59,59,0.05);
+    border: 1px solid rgba(255,59,59,0.2);
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .logic-chain p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #ccc;
+  }
+  .logic-chain strong { color: var(--red); }
+
+  /* ── TWO COLS ── */
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .col-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+  .col-card .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .col-card.danger .card-title { color: var(--red); }
+  .col-card.safe .card-title { color: var(--green); }
+  .col-card.warn .card-title { color: var(--yellow); }
+
+  .col-card ul {
+    list-style: none;
+  }
+  .col-card ul li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #bbb;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+  }
+  .col-card ul li:last-child { border-bottom: none; }
+  .col-card ul li .bullet { flex-shrink: 0; }
+
+  /* ── VERDICT ── */
+  .verdict {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 36px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .verdict-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  .verdict-title span { color: var(--red); }
+
+  .verdict-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .verdict-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 18px;
+    text-align: center;
+  }
+  .verdict-item .vi-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .verdict-item .vi-val {
+    font-weight: 900;
+    font-size: 15px;
+  }
+  .vi-val.red { color: var(--red); }
+  .vi-val.yellow { color: var(--yellow); }
+  .vi-val.green { color: var(--green); }
+
+  .verdict-summary {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #ccc;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  .verdict-summary strong { color: #fff; }
+
+  /* ── REAL WATCH ── */
+  .watch-box {
+    background: rgba(59,143,255,0.05);
+    border: 1px solid rgba(59,143,255,0.3);
+    padding: 28px;
+  }
+  .watch-box .wt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .watch-box ul {
+    list-style: none;
+  }
+  .watch-box ul li {
+    font-size: 14px;
+    color: #bbb;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+  .watch-box ul li:last-child { border-bottom: none; }
+  .watch-box ul li .num {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--blue);
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 1px;
+  }
+
+  /* spacer */
+  .spacer { margin-bottom: 40px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="tag">▶ 팩트체크 리포트</div>
+    <h1>테슬라 건식공정<br><span>진짜</span> 성공했나?</h1>
+  </div>
+  <div class="header-right">
+    <div class="date">2026.03 기준</div>
+    <div class="verdict-badge">과장 주의</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 테슬라 주장 -->
+  <div class="section-title">01 — 테슬라의 공식 발표</div>
+  <div class="claim-box">
+    <div class="label">TESLA 공식 발표 (FY2025 Q4 주주서한)</div>
+    <p>"4680 셀의 음극(anode)과 양극(cathode) 모두를<br>건식공정(dry electrode)으로 생산하고 있다"</p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-title">02 — 6년의 여정</div>
+  <div class="timeline">
+    <div class="tl-item ok">
+      <div class="tl-year">2020</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="title">Battery Day 선언</div>
+        <div class="desc">Maxwell Technologies 인수 기반, kWh당 원가 56% 절감 + $25,000 테슬라 약속</div>
+      </div>
+    </div>
+    <div class="tl-item warn">
+      <div class="tl-year">2022~23</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="title">음극만 성공, 양극은 반복 실패</div>
+        <div class="desc">접착력 불량 · 두께 불균일 · 층간 박리 문제로 라인 재설계 반복</div>
+      </div>
+    </div>
+    <div class="tl-item warn">
+      <div class="tl-year">2024 초</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="title">불량률 70~80% 유출</div>
+        <div class="desc">업계 평균 불량률 2% 미만. 테슬라는 "연말까지 수율 90% 달성" 목표 제시 → 미달성</div>
+      </div>
+    </div>
+    <div class="tl-item warn">
+      <div class="tl-year">2024 중</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="title">4680 생산 중단 검토설</div>
+        <div class="desc">에너지 밀도·충전 성능·원가 문제로 기가텍사스 라인 중단 및 외부 조달 전환 검토</div>
+      </div>
+    </div>
+    <div class="tl-item highlight">
+      <div class="tl-year">2024 12월</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="title">엘앤에프(L&F) 계약 99% 삭감 공시</div>
+        <div class="desc">4680 양극재 공급 계약 3.83조원 → 973만원. "공급 수량 변경"이 공식 이유</div>
+      </div>
+    </div>
+    <div class="tl-item ok">
+      <div class="tl-year">2025 Q4</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-content">
+        <div class="title">"음·양극 모두 건식" 공식 선언</div>
+        <div class="desc">기가텍사스에서 완전 건식공정 양산 발표. 수율·생산 비율 수치는 미공개</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 질문 -->
+  <div class="question-block">
+    <div class="q">그런데 수율 얘기가 왜 없을까?</div>
+    <div class="sub">성공했다면 가장 먼저 숫자를 내밀었겠지. 침묵 자체가 신호다.</div>
+  </div>
+
+  <!-- 공개 vs 비공개 -->
+  <div class="section-title">03 — 공개된 것 vs 공개 안 된 것</div>
+  <div class="compare">
+    <div class="compare-header pub">✅ 공개된 것</div>
+    <div class="compare-header real">❌ 공개 안 된 것</div>
+
+    <div class="compare-cell pub"><span class="icon">·</span> 음·양극 모두 건식으로 생산 중</div>
+    <div class="compare-cell real"><span class="icon">·</span> 수율(yield rate)이 몇 %인지</div>
+
+    <div class="compare-cell pub"><span class="icon">·</span> 기가텍사스에서 양산 시작</div>
+    <div class="compare-cell real"><span class="icon">·</span> 전체 4680 중 건식 비율</div>
+
+    <div class="compare-cell pub"><span class="icon">·</span> 모델Y 일부에 4680 재탑재</div>
+    <div class="compare-cell real"><span class="icon">·</span> kWh당 원가 실제로 얼마나 줄었나</div>
+
+    <div class="compare-cell pub"><span class="icon">·</span> 머스크 "믿을 수 없이 어려웠다"</div>
+    <div class="compare-cell real"><span class="icon">·</span> 모델Y 중 건식 4680 탑재 비율</div>
+  </div>
+
+  <!-- SMOKING GUN -->
+  <div class="section-title">04 — 스모킹건: 엘앤에프 공시</div>
+  <div class="smoking-gun">
+    <p style="font-size:15px; color:#ccc; margin-bottom:20px;">기업 공시는 거짓말을 못 한다. 협력사 공시에서 테슬라의 민낯이 드러났다.</p>
+    <div class="contract">
+      <div class="contract-num before">
+        <div class="amount">3.83조원</div>
+        <div class="label">원래 계약액 (2023.02)</div>
+      </div>
+      <div class="contract-arrow">→ 99% 삭감 →</div>
+      <div class="contract-num after">
+        <div class="amount">973만원</div>
+        <div class="label">실제 납품액 (2024.12)</div>
+      </div>
+    </div>
+    <div class="logic-chain">
+      <p>
+        <strong>논리적으로 두 가지 선택지만 존재한다</strong><br><br>
+        ① 양산은 됐지만 수율이 너무 낮아서 <strong>재료가 별로 필요하지 않았다</strong><br>
+        ② 아직 진짜 대량 양산이 아니다<br><br>
+        어느 쪽이든 <strong>"1000만원 인하 임박"과는 완전히 반대 방향이다.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- 모델Y 탑재 진실 -->
+  <div class="section-title">05 — 모델Y 탑재의 진짜 이유</div>
+  <div class="two-cols">
+    <div class="col-card warn">
+      <div class="card-title">⚠ 제미나이/유튜버 주장</div>
+      <ul>
+        <li><span class="bullet">→</span> 볼륨 모델에 투입 = 수율 성공 증거</li>
+        <li><span class="bullet">→</span> 모델Y 전체에 탑재 시작</li>
+        <li><span class="bullet">→</span> 기술 자신감의 신호</li>
+        <li><span class="bullet">→</span> 가격 인하 임박</li>
+      </ul>
+    </div>
+    <div class="col-card danger">
+      <div class="card-title">✗ 테슬라 공식 발표 원문</div>
+      <ul>
+        <li><span class="bullet">→</span> "certain Model Ys" — <strong style="color:#fff">일부</strong>에만, 비율 미공개</li>
+        <li><span class="bullet">→</span> 관세·무역장벽 대응 공급망 헷지</li>
+        <li><span class="bullet">→</span> 사이버트럭 판매 부진 → 남는 4680 전용</li>
+        <li><span class="bullet">→</span> 충전속도는 아직 파나소닉 2170 미만</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 최종 판정 -->
+  <div class="section-title">06 — 최종 판정</div>
+  <div class="verdict">
+    <div class="verdict-title">결론: <span>반쪽짜리 성공</span></div>
+    <div class="verdict-grid">
+      <div class="verdict-item">
+        <div class="vi-label">기술적 성공</div>
+        <div class="vi-val yellow">△ 진행 중</div>
+      </div>
+      <div class="verdict-item">
+        <div class="vi-label">경제성 있는 수율</div>
+        <div class="vi-val red">? 미확인</div>
+      </div>
+      <div class="verdict-item">
+        <div class="vi-label">가격 인하 임박</div>
+        <div class="vi-val red">✗ 근거 없음</div>
+      </div>
+    </div>
+    <div class="verdict-summary">
+      <strong>"불가능하다는 걸 증명한 것"</strong>에서 <strong>"가능하다는 걸 증명한 것"</strong>으로는 넘어왔다.<br>
+      하지만 <strong>"경쟁력 있는 원가로 대량생산"</strong>은 아직 검증 중이다.<br><br>
+      원가가 절감되더라도 테슬라는 마진 확보를 우선한다. 2025년 자동차 매출 10% 감소, 브랜드 이미지 타격, 옵티머스 투자 집중 — 지금은 <strong>가격을 내릴 유인보다 마진을 지킬 이유가 더 크다.</strong>
+    </div>
+  </div>
+
+  <!-- 진짜 성공 지표 -->
+  <div class="section-title">07 — 진짜 성공의 신호를 보려면</div>
+  <div class="watch-box">
+    <div class="wt">▶ 이게 나오면 그때 믿어라</div>
+    <ul>
+      <li>
+        <span class="num">01</span>
+        엘앤에프, 포스코퓨처엠 등 <strong style="color:#fff">양극재 공급사의 테슬라향 납품 물량이 실제로 증가</strong>하기 시작할 때
+      </li>
+      <li>
+        <span class="num">02</span>
+        Q1 2026 실적에서 <strong style="color:#fff">4680 생산량, 수율, kWh당 원가 수치</strong>가 구체적으로 공개될 때
+      </li>
+      <li>
+        <span class="num">03</span>
+        모델Y 또는 사이버트럭의 <strong style="color:#fff">실제 가격 인하</strong>가 발표될 때 (원가 절감의 하방 신호)
+      </li>
+      <li>
+        <span class="num">04</span>
+        "certain Model Ys"가 아닌 <strong style="color:#fff">전 라인업으로 4680이 확대</strong>되는 공식 발표
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">팩트 기반 분석 · 출처: Tesla FY2025 Q4 주주서한 · L&F 공시 · Electrek · Bloomberg</div>
+
+</body>
+</html>
