@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미니멀 홈오피스 시스템 — 브랜드 기획서</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f2ede4;
+    color: #1a1a1a;
+    padding: 5rem 2rem 4rem;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  /* Header */
+  .header { margin-bottom: 3rem; }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    background: #e8e0d0;
+    color: #7a5c3a;
+  }
+
+  .title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle { font-size: 16px; color: #666; line-height: 1.7; }
+  .divider { width: 36px; height: 3px; background: #8b6340; margin: 2rem 0; border-radius: 2px; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 2.5rem 0 1.25rem;
+  }
+
+  /* Cards */
+  .card {
+    background: #faf7f2;
+    border: 1.5px solid #e0d8cc;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .card-body { font-size: 15px; color: #444; line-height: 1.9; }
+  .card-body strong { font-weight: 700; color: #1a1a1a; }
+  .card-body strong.brown { color: #7a5c3a; }
+  .card-body strong.sage { color: #4a6741; }
+  .card-body strong.rust { color: #8b3a2a; }
+  .card-body strong.amber { color: #8b6010; }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .tag-brown { background: #ede0cc; color: #7a5c3a; }
+  .tag-sage { background: #dce8d8; color: #3a5c32; }
+  .tag-rust { background: #f0ddd8; color: #8b3a2a; }
+  .tag-amber { background: #f0e8d0; color: #8b6010; }
+  .tag-dark { background: #2c2420; color: #f2ede4; }
+
+  /* Dark card */
+  .dark-card {
+    background: #2c2420;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 16px;
+    color: #f2ede4;
+  }
+
+  .dark-card .card-title {
+    color: #f2ede4;
+    margin-bottom: 16px;
+    font-family: 'Noto Serif KR', serif;
+  }
+
+  .insight-item { display: flex; gap: 1rem; margin-bottom: 14px; align-items: flex-start; }
+  .insight-item:last-child { margin-bottom: 0; }
+  .insight-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .dot-brown { background: #c49a6c; }
+  .dot-sage { background: #7ab870; }
+  .dot-rust { background: #c46a54; }
+  .dot-amber { background: #c4a040; }
+  .dot-mist { background: #8aa4a0; }
+
+  .insight-text { font-size: 15px; color: #c8bfb0; line-height: 1.8; }
+  .insight-text strong { color: #f2ede4; font-weight: 700; }
+
+  /* Stat grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .stat-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    background: #faf7f2;
+    border: 1.5px solid #e0d8cc;
+    border-radius: 20px;
+    padding: 1.5rem;
+  }
+
+  .stat-label { font-size: 11px; color: #999; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .stat-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; font-family: 'Noto Serif KR', serif; }
+  .stat-desc { font-size: 13px; color: #777; line-height: 1.5; }
+
+  .stat-brown .stat-value { color: #7a5c3a; }
+  .stat-sage .stat-value { color: #3a6040; }
+  .stat-rust .stat-value { color: #8b3a2a; }
+  .stat-amber .stat-value { color: #8b6010; }
+
+  /* Product table */
+  .product-table {
+    background: #faf7f2;
+    border: 1.5px solid #e0d8cc;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .product-row {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #ede8e0;
+  }
+
+  .product-row:last-child { border-bottom: none; }
+  .product-row.header { background: #2c2420; }
+
+  .product-cell {
+    padding: 1rem 1.25rem;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .product-cell.label-cell {
+    text-align: left;
+    align-items: flex-start;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 13px;
+    background: #f5f0e8;
+  }
+
+  .product-row.header .product-cell {
+    color: #c8bfb0;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .product-cell .price {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #7a5c3a;
+    display: block;
+  }
+
+  .product-cell .price-note {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  .check { color: #3a6040; font-size: 16px; }
+  .cross { color: #8b3a2a; font-size: 16px; }
+
+  /* Timeline */
+  .timeline { padding: 0; }
+
+  .tl-item {
+    display: flex;
+    gap: 20px;
+    padding: 0 0 28px 0;
+    position: relative;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 34px;
+    top: 28px;
+    bottom: 0;
+    width: 1px;
+    background: #e0d8cc;
+  }
+
+  .tl-item:last-child::before { display: none; }
+
+  .tl-year {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #999;
+    min-width: 40px;
+    text-align: right;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #f2ede4;
+    border: 2px solid #8b6340;
+    flex-shrink: 0;
+    margin-top: 4px;
+    z-index: 1;
+  }
+
+  .tl-dot.active { background: #8b6340; }
+
+  .tl-content { flex: 1; }
+
+  .tl-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+
+  .tl-desc { font-size: 13px; color: #777; line-height: 1.6; }
+
+  /* Fact check */
+  .fact-card {
+    background: #faf7f2;
+    border: 1.5px solid #e0d8cc;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 16px;
+  }
+
+  .fact-row {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ede8e0;
+    align-items: flex-start;
+  }
+
+  .fact-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .fact-row:first-child { padding-top: 0; }
+
+  .fact-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-ok { background: #dce8d8; color: #3a5c32; }
+  .badge-no { background: #f0ddd8; color: #8b3a2a; }
+  .badge-mid { background: #f0e8d0; color: #8b6010; }
+
+  .fact-text { font-size: 14px; color: #555; line-height: 1.6; }
+  .fact-text strong { font-weight: 700; color: #1a1a1a; }
+
+  /* Summary */
+  .summary {
+    background: #faf7f2;
+    border: 1.5px solid #e0d8cc;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    border-left: 4px solid #8b6340;
+    margin-top: 8px;
+  }
+
+  .summary-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .summary-body {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 17px;
+    color: #1a1a1a;
+    line-height: 1.9;
+    font-weight: 400;
+  }
+
+  .summary-body strong { font-weight: 600; }
+  .summary-body strong.brown { color: #7a5c3a; }
+  .summary-body strong.sage { color: #3a6040; }
+  .summary-body strong.rust { color: #8b3a2a; }
+
+  /* Tags row */
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tag-pill {
+    padding: 5px 14px;
+    border: 1.5px solid #c8b89a;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #7a5c3a;
+    font-weight: 500;
+    background: #faf7f2;
+  }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 4rem; font-size: 13px; color: #aaa; }
+
+  @media (max-width: 640px) {
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .product-row { grid-template-columns: 1fr 1fr; }
+    body { padding: 3rem 1.25rem 3rem; }
+    .title { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="badge">Brand Concept — 2026.03.29 새벽</div>
+    <div class="title">삶의 시스템을 파는 회사<br>의자 회사가 아니다</div>
+    <div class="subtitle">T80 요추 분쇄기에서 시작해 새벽 내내 몸으로 검증한 것들. 완벽한 의자는 없다. 움직임이 답이고, 의자는 그 사이를 채우는 도구일 뿐이다.</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 철학 핵심 -->
+  <div class="section-title">Core Philosophy — 왜 지금 이 브랜드인가</div>
+
+  <div class="dark-card">
+    <div class="card-title">인류는 수백만 년 동안 움직였다</div>
+    <div class="insight-item">
+      <div class="insight-dot dot-brown"></div>
+      <div class="insight-text"><strong>허먼밀러는 1994년의 정답이었다.</strong> 하루 8~10시간 꼼짝없이 앉아야 했던 시대의 혁신. 하지만 이제 질문 자체가 바뀌었다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-sage"></div>
+      <div class="insight-text"><strong>스탠딩 데스크가 있는 시대다.</strong> 움직임이 중요하다는 인식이 생겼다. 의자 혼자 다 해결할 필요가 없다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-rust"></div>
+      <div class="insight-text"><strong>T80 60만원짜리 요추 분쇄기 덕분에 발견했다.</strong> 요추를 건드리지 않는 구조가 오히려 더 편하다. 5만원 식당의자에서 1년 동안 허리가 멀쩡했던 건 우연이 아니었다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-amber"></div>
+      <div class="insight-text"><strong>사오체는 의자 회사가 시스템으로 확장한 것이다.</strong> 우리는 처음부터 시스템이 주인공이다. 의자는 그 중 하나일 뿐.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-mist"></div>
+      <div class="insight-text"><strong>엄청 크게 성공할 필요가 없다.</strong> VC에 치이지 않고, 철학 타협 없이, 작지만 오래 가는 브랜드. 그게 더 강하다.</div>
+    </div>
+  </div>
+
+  <!-- 핵심 발견 4가지 -->
+  <div class="section-title">Body Discovery — 몸으로 검증한 인사이트</div>
+
+  <div class="stat-grid">
+    <div class="stat-card stat-brown">
+      <div class="stat-label">발견 01</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">능동적 착석</div>
+      <div class="stat-desc">완전 지지도 완전 방치도 아닌 중간. 코어가 미세하게 일하는 구조가 장기적으로 더 건강하다. 발란스볼의 극단도 아니고, 에어론의 완전 지지도 아닌 황금 지점.</div>
+    </div>
+    <div class="stat-card stat-brown">
+      <div class="stat-label">발견 02</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">요추 비간섭</div>
+      <div class="stat-desc">요추 곡선은 사람마다 다르다. 평균값으로 만든 지지대가 안 맞으면 방해가 된다. 강요하지 않는 두 가지 방법 — 비우거나, 완만하게 채우거나.</div>
+    </div>
+    <div class="stat-card stat-brown">
+      <div class="stat-label">발견 03</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">고통→해소</div>
+      <div class="stat-desc">스탠딩 후 앉으면 더 편하다. 대비 효과가 편안함을 만든다. 틸팅도 굳이, 팔걸이도 굳이. 처음부터 편한 것보다 대비에서 오는 편안함이 더 강렬하다.</div>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card stat-sage">
+      <div class="stat-label">발견 04</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">역할 분담</div>
+      <div class="stat-desc">의자가 혼자 다 해결하려면 복잡해진다. 스탠딩 + 의자 + 모니터암이 역할을 나누면 각각이 심플해진다. 임스가 1958년에 이미 좌판 각도로 틸팅을 대체했다.</div>
+    </div>
+    <div class="stat-card stat-sage">
+      <div class="stat-label">발견 05</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">책상 여백</div>
+      <div class="stat-desc">책상 위의 여백이 머릿속 여백을 만든다. 혼자 사는 사람에게 책상은 식탁이자 작업대. 위에 아무것도 없는 것이 집중력과 삶의 질을 동시에 높인다.</div>
+    </div>
+    <div class="stat-card stat-sage">
+      <div class="stat-label">발견 06</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">철제 4발</div>
+      <div class="stat-desc">움직이는 부품이 없다. 가스리프트는 5~10년 후 꺼진다. 4발 고정 크롬 구조는 30년을 버틴다. 내구성이 브랜드 신뢰의 근거다. AS 20년 보장의 자신감.</div>
+    </div>
+  </div>
+
+  <!-- 의자 계보 -->
+  <div class="section-title">Chair History — 의자의 계보, 그리고 우리</div>
+
+  <div class="card">
+    <div class="card-tag tag-brown">70년의 역사가 같은 방향을 가리킨다</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1955</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">야콥센 세븐 체어 — 심플함의 원형</div>
+          <div class="tl-desc">4발 고정, 요추 간섭 없음, 패딩 쿠션. 70년이 지나도 안 늙는 디자인. 오늘의집 베스트셀러. 5만원에 팔린다. 오피스 버전은 250만원.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1958</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">임스 EA117 — 각도로 틸팅을 대체</div>
+          <div class="tl-desc">심플한 구조에 높이 조절 추가. 좌판에 미세한 전방 경사 각도로 골반을 자연스럽게 유도. 틸팅 없이 자세를 해결했다. 정품 330만원.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1994</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">허먼밀러 에어론 — 그 시대의 정답</div>
+          <div class="tl-desc">8~10시간 착석이 기본이던 시대의 혁신. 메쉬, 체압 분산, 통기성. 맞는 사람에겐 여전히 유효하다. 하지만 이제 질문이 바뀌었다.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2026</div>
+        <div class="tl-dot active"></div>
+        <div class="tl-content">
+          <div class="tl-title" style="color: #7a5c3a;">우리 — 스탠딩 시대의 정답</div>
+          <div class="tl-desc">움직임이 있는 시대. 의자 혼자 다 안 해도 된다. 심플하고, 30년 버티고, 더럽게 싸고, 철학이 있다. 삶의 시스템을 파는 회사.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 제품 라인업 -->
+  <div class="section-title">Product Lineup — 세 가지 선택, 하나의 철학</div>
+
+  <div class="product-table">
+    <div class="product-row header">
+      <div class="product-cell label-cell" style="background:#2c2420; color:#c8bfb0; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; align-items:flex-start; flex-direction:column; justify-content:center;">제품 / 특징</div>
+      <div class="product-cell" style="flex-direction:column;">
+        <span style="color:#c8bfb0; font-weight:700; font-size:12px; letter-spacing:0.08em;">베이직</span>
+      </div>
+      <div class="product-cell" style="flex-direction:column;">
+        <span style="color:#c49a6c; font-weight:700; font-size:12px; letter-spacing:0.08em;">프로</span>
+      </div>
+      <div class="product-cell" style="flex-direction:column;">
+        <span style="color:#7ab870; font-weight:700; font-size:12px; letter-spacing:0.08em;">세트</span>
+      </div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">가격</div>
+      <div class="product-cell"><span class="price">₩80,000</span></div>
+      <div class="product-cell"><span class="price">₩150,000</span></div>
+      <div class="product-cell"><span class="price">₩400,000</span><span class="price-note">세트 전체</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">높이 조절</div>
+      <div class="product-cell"><span style="font-size:13px; color:#777;">S / M / L 고정</span></div>
+      <div class="product-cell"><span style="font-size:13px; color:#7a5c3a; font-weight:700;">다단계 부품</span></div>
+      <div class="product-cell"><span style="font-size:13px; color:#555;">선택 포함</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">철제 4발 구조</div>
+      <div class="product-cell"><span class="check">✓</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">메모리폼 쿠션</div>
+      <div class="product-cell"><span class="check">✓</span></div>
+      <div class="product-cell"><span style="font-size:13px; color:#7a5c3a; font-weight:700;">고밀도</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">스탠딩 데스크</div>
+      <div class="product-cell"><span class="cross">—</span></div>
+      <div class="product-cell"><span class="cross">—</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">모니터암</div>
+      <div class="product-cell"><span class="cross">—</span></div>
+      <div class="product-cell"><span class="cross">—</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">체형 컨설팅</div>
+      <div class="product-cell"><span class="cross">—</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+      <div class="product-cell"><span class="check">✓</span></div>
+    </div>
+    <div class="product-row">
+      <div class="product-cell label-cell">AS 보장</div>
+      <div class="product-cell"><span style="font-size:13px; font-weight:700; color:#7a5c3a;">20년</span></div>
+      <div class="product-cell"><span style="font-size:13px; font-weight:700; color:#7a5c3a;">20년</span></div>
+      <div class="product-cell"><span style="font-size:13px; font-weight:700; color:#7a5c3a;">전체 보장</span></div>
+    </div>
+  </div>
+
+  <!-- 시스템 구성 -->
+  <div class="section-title">Full System — 책상 위에 아무것도 없는 것이 목표</div>
+
+  <div class="dark-card">
+    <div class="card-title">역할 분담이 완벽한 7개의 부품</div>
+    <div class="insight-item">
+      <div class="insight-dot dot-brown"></div>
+      <div class="insight-text"><strong>의자 (베이직/프로)</strong> — 앉는 것만 담당. 심플한 구조. 30년 내구. 몸이 스스로 일하게 둔다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-sage"></div>
+      <div class="insight-text"><strong>모션 스탠딩 데스크</strong> — 움직임 담당. 작은 면적으로 충분. 소형 모터로 OK — 알루미늄 박스를 옆에 빼기 때문에 부담이 줄어든다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-mist"></div>
+      <div class="insight-text"><strong>모니터암</strong> — 화면 높이·각도 담당. 데스크 높이가 바뀌어도 화면은 고정. 케이블 정리까지 겸한다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-amber"></div>
+      <div class="insight-text"><strong>알루미늄 수납 박스</strong> — 맥북/맥미니/스팀머신 수납. 풀 알루미늄 상판이 방열판 역할. 앞면 구멍 + 뒷면 오픈으로 공기 순환. 플라스틱(일반) / 알루미늄(프리미엄) 두 버전. 데스크 좌측 배치로 모터 부담 없음.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-brown"></div>
+      <div class="insight-text"><strong>직물 케이블 슬리브</strong> — 맥북 + 충전선 + 스팀 전원선을 하나로 묶는 브레이드 직물 튜브. 숨기지 않고 보여주는 디자인 요소. 데스크 오르내릴 때 자연스럽게 늘어났다 줄어든다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-rust"></div>
+      <div class="insight-text"><strong>하단 케이블 트레이</strong> — 데스크 하판 알루미늄 슬롯. 멀티탭 + 어댑터 + 여분 선 수납. 뒷면만 오픈. 책상 위가 완전히 비워진다.</div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-dot dot-sage"></div>
+      <div class="insight-text"><strong>조명 스탠드</strong> — 오스람 15년처럼 오래 가는 심플한 조명. 군더더기 없는 본질적 설계. 브랜드 철학의 마지막 층위.</div>
+    </div>
+  </div>
+
+  <!-- 책상 위 허용 목록 -->
+  <div class="stat-grid-2">
+    <div class="stat-card" style="border-left: 3px solid #3a6040;">
+      <div class="stat-label">책상 위 허용 목록</div>
+      <div class="card-body" style="font-size:14px; line-height:2;">
+        ✓ 아이폰<br>
+        ✓ 에어팟<br>
+        ✓ 키보드<br>
+        ✓ 마우스 + 패드<br>
+        ✓ 고급 조명 스탠드
+      </div>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #8b3a2a;">
+      <div class="stat-label">책상 위 금지 목록</div>
+      <div class="card-body" style="font-size:14px; line-height:2; color:#8b3a2a;">
+        ✗ 맥북 / 맥미니 → 박스로<br>
+        ✗ 멀티탭 → 하단 트레이로<br>
+        ✗ 케이블 → 슬리브 튜브로<br>
+        ✗ 게임기 → 박스 내부로<br>
+        ✗ 그 외 모든 것
+      </div>
+    </div>
+  </div>
+
+  <!-- 포지셔닝 숫자 -->
+  <div class="section-title">Market Position — 숫자가 말한다</div>
+
+  <div class="stat-grid">
+    <div class="stat-card stat-rust">
+      <div class="stat-label">식당의자 원가</div>
+      <div class="stat-value">₩5만</div>
+      <div class="stat-desc">1년 실사용 검증 완료. 요추 공간 오픈. 메모리폼 쿠션. 오늘의집 베스트셀러 동급 구조.</div>
+    </div>
+    <div class="stat-card stat-rust">
+      <div class="stat-label">사오체 의자 단품</div>
+      <div class="stat-value">₩62만</div>
+      <div class="stat-desc">우리의 간접 경쟁자. 의자 하나. 우리 세트보다 비싸다.</div>
+    </div>
+    <div class="stat-card stat-sage">
+      <div class="stat-label">우리 세트 전체</div>
+      <div class="stat-value">₩40만</div>
+      <div class="stat-desc">의자 + 스탠딩 + 모니터암. 사오체 의자 단품보다 싸고, 시스템은 완성형.</div>
+    </div>
+  </div>
+
+  <!-- 반론 검증 -->
+  <div class="section-title">Objection Check — 반론 검증 결과</div>
+
+  <div class="fact-card">
+    <div class="card-title" style="margin-bottom:16px; font-family:'Noto Serif KR',serif;">새벽 반론 배틀 결과</div>
+    <div class="fact-row">
+      <div class="fact-badge badge-ok">반박됨</div>
+      <div class="fact-text"><strong>몸 신호 방식의 함정</strong> — 게임할 때 타이머 필요하고 쉽지 않지만, 철학이 습관을 만든다. 아무리 좋은 의자도 게이머를 구하지 못한다. 우리는 움직이는 사람을 위한 브랜드.</div>
+    </div>
+    <div class="fact-row">
+      <div class="fact-badge badge-ok">반박됨</div>
+      <div class="fact-text"><strong>장기 검증 부족</strong> — 1년 실사용 데이터 있음. 초장시간 착석용이 아니라 스탠딩 시스템의 파트너 용도. 50분 앉고 10분 서는 리듬에서 검증됨.</div>
+    </div>
+    <div class="fact-row">
+      <div class="fact-badge badge-ok">반박됨</div>
+      <div class="fact-text"><strong>카피 리스크</strong> — 철학과 신뢰는 카피 불가. 브랜딩이 차별점. 1~2만원 더 싸게 팔아도 "왜 이 사이즈가 나한테 맞는지" 설명해주는 브랜드는 못 따라온다.</div>
+    </div>
+    <div class="fact-row">
+      <div class="fact-badge badge-ok">반박됨</div>
+      <div class="fact-text"><strong>세트 강요 문제</strong> — 세트는 선택지. 박스만 사도 되고, 의자만 사도 된다. 각 제품이 브랜드 입문 경로가 되는 구조. 애플 생태계와 같은 원리.</div>
+    </div>
+    <div class="fact-row">
+      <div class="fact-badge badge-mid">부분 인정</div>
+      <div class="fact-text"><strong>"불편함" 마케팅 역풍</strong> — 굳이 마케팅에서 말할 필요 없다. 철학 이해한 사람은 스스로 알고, 디자인에 끌려 온 사람은 써보면서 안다. 말하지 않아도 느끼게 하는 브랜드.</div>
+    </div>
+  </div>
+
+  <!-- 비즈니스 구조 -->
+  <div class="section-title">Business Structure — 실행 구조</div>
+
+  <div class="stat-grid">
+    <div class="stat-card stat-brown">
+      <div class="stat-label">창업자 역할</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">철학 & 방향</div>
+      <div class="stat-desc">아이디어와 철학 제공. 실행 위임. 유튜브로 브랜드 스토리 직접 전달. 성공 후 매각도 옵션.</div>
+    </div>
+    <div class="stat-card stat-brown">
+      <div class="stat-label">자본 구조</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">55 : 45</div>
+      <div class="stat-desc">창업자 55%, 자본 파트너 45%. 의사결정권 보존. 초기 투자 3~4억으로 실행 가능.</div>
+    </div>
+    <div class="stat-card stat-brown">
+      <div class="stat-label">유통 채널</div>
+      <div class="stat-value" style="font-size:18px; margin-bottom:8px;">오늘의집</div>
+      <div class="stat-desc">이미 식당의자 베스트셀러 검증된 플랫폼. 여성 타깃 강점. 유튜브 → 오늘의집 자연스러운 전환.</div>
+    </div>
+  </div>
+
+  <!-- 브랜드 스토리 -->
+  <div class="section-title">Brand Origin — 스토리가 곧 광고다</div>
+
+  <div class="card">
+    <div class="card-tag tag-dark">T80에서 시작된 브랜드</div>
+    <div class="card-title">요추 분쇄기가 만든 요추 해방 철학</div>
+    <div class="card-body">
+      60만원짜리 T80을 샀다. <strong class="rust">신경 자극이 왔다. 공포에 압도당했다.</strong> 병원을 갔더니 무릎 근육이 다 빠져있었다. 그러다 옆에 있던 <strong class="brown">5만원짜리 식당의자에서 1년 동안 허리가 멀쩡했다</strong>는 걸 발견했다. 새벽 내내 앉고, 서고, 철학을 검증하고, 1955년 야콥센이 이미 같은 결론을 냈다는 걸 알았다. 허먼밀러가 왜 메쉬에 집착했는지, 임스가 왜 각도로 틸팅을 대체했는지, <strong class="sage">스탠딩이 왜 핵심인지</strong> — 몸으로 이해했다.<br><br>
+      이게 브랜드의 원점이다. 광고할 필요 없다. 유튜브로 이 과정을 그대로 보여주면 된다.
+    </div>
+  </div>
+
+  <!-- 온보딩 + 조명 -->
+  <div class="stat-grid-2">
+    <div class="stat-card" style="border-left: 3px solid #8b6340;">
+      <div class="stat-label">박스 안에 들어있는 것</div>
+      <div class="stat-value" style="font-size:16px; margin-bottom:10px;">북클릿 한 권</div>
+      <div class="stat-desc">왜 이렇게 만들었는지, 어떻게 써야 하는지, 이 브랜드가 무엇을 팔려는지. 애플 박스 열었을 때 그 느낌. 제품이 아니라 경험을 파는 것.</div>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #4a6741;">
+      <div class="stat-label">추가 라인업 후보</div>
+      <div class="stat-value" style="font-size:16px; margin-bottom:10px;">조명 스탠드</div>
+      <div class="stat-desc">오스람처럼 15년 버티는 심플한 조명. 군더더기 없는 본질 설계. "오래된 것이 더 고급스럽다"는 브랜드 철학의 연장.</div>
+    </div>
+  </div>
+
+  <!-- 키워드 -->
+  <div class="section-title">Keywords</div>
+  <div class="tags-row">
+    <span class="tag-pill">삶의 시스템</span>
+    <span class="tag-pill">능동적 착석</span>
+    <span class="tag-pill">요추 비간섭</span>
+    <span class="tag-pill">철제 4발</span>
+    <span class="tag-pill">AS 20년</span>
+    <span class="tag-pill">스탠딩 파트너</span>
+    <span class="tag-pill">메모리폼</span>
+    <span class="tag-pill">알루미늄 박스</span>
+    <span class="tag-pill">직물 케이블 슬리브</span>
+    <span class="tag-pill">책상 위 여백</span>
+    <span class="tag-pill">맥 유저 최적화</span>
+    <span class="tag-pill">오늘의집</span>
+    <span class="tag-pill">중국 OEM</span>
+    <span class="tag-pill">꿈을 파는 브랜드</span>
+    <span class="tag-pill">의자 회사 아님</span>
+  </div>
+
+  <!-- 결론 -->
+  <div class="summary" style="margin-top: 24px;">
+    <div class="summary-title">브랜드 핵심 한 문장</div>
+    <div class="summary-body">
+      <strong class="brown">완벽한 의자는 없다.</strong> 움직임이 답이고, 의자는 그 사이를 채우는 도구일 뿐이다. 우리는 의자를 파는 게 아니라 <strong class="sage">삶을 정비하는 시스템을 파는 회사</strong>다. 책상 위에 아무것도 없는 것이 가장 좋다. <strong>더 이상의 낭비 없는 것이 진정한 혁신이다.</strong>
+    </div>
+  </div>
+
+  <div class="footer">made with Claude · 2026.03.29 새벽 · T80 요추 분쇄기에서 시작된 브랜드 기획서</div>
+
+</div>
+</body>
+</html>
